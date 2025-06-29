@@ -93,10 +93,33 @@ select artist,count(track) as no_of_tracks from spotify GROUP BY artist order by
 
 ### Medium Level
 1. Calculate the average danceability of tracks in each album.
+```sql
+select album,avg(danceability) from spotify group by album order by 2 desc
+``` 
 2. Find the top 5 tracks with the highest energy values.
+```sql
+select track,energy from spotify order by energy desc limit 5
+```
 3. List all tracks along with their views and likes where `official_video = TRUE`.
+```sql
+select track,views,likes from spotify where official_video ='true' order by 2 desc
+```
 4. For each album, calculate the total views of all associated tracks.
+```sql
+select album,count(track)as total_tracks,sum(views)as total_views from spotify group by album order by 3 desc
+```
 5. Retrieve the track names that have been streamed on Spotify more than YouTube.
+```sql
+select * from
+(select
+ track,
+ coalesce(sum(case when most_played_on ='Youtube' then stream end),0) as streamed_on_youtube,--2nd level grouping using case function
+ coalesce(sum(case when most_played_on ='Spotify' then stream end),0)as streamed_on_spotify
+from spotify
+group by 1
+) as t1
+where streamed_on_spotify > streamed_on_youtube and streamed_on_youtube <>0
+```
 
 ### Advanced Level
 1. Find the top 3 most-viewed tracks for each artist using window functions.
