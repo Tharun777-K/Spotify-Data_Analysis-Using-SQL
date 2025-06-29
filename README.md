@@ -75,9 +75,21 @@ In advanced stages, the focus shifts to improving query performance. Some optimi
 select track,stream from spotify where stream>1000000000
 ``` 
 2. List all albums along with their respective artists.
+```sql
+select  distinct album, artist from spotify order by album;
+``` 
 3. Get the total number of comments for tracks where `licensed = TRUE`.
+```sql
+select SUM(comments) from spotify where licensed='true'
+``` 
 4. Find all tracks that belong to the album type `single`.
+```sql
+select * from spotify where album_type='single'
+``` 
 5. Count the total number of tracks by each artist.
+```sql
+select artist,count(track) as no_of_tracks from spotify GROUP BY artist order by 2 desc;
+``` 
 
 ### Medium Level
 1. Calculate the average danceability of tracks in each album.
