@@ -74,41 +74,41 @@ In advanced stages, the focus shifts to improving query performance. Some optimi
 ```sql
 select track,stream from spotify where stream>1000000000
 ``` 
-2. List all albums along with their respective artists.
+2. **List all albums along with their respective artists.**
 ```sql
 select  distinct album, artist from spotify order by album;
 ``` 
-3. Get the total number of comments for tracks where `licensed = TRUE`.
+3.**Get the total number of comments for tracks where `licensed = TRUE`.**
 ```sql
 select SUM(comments) from spotify where licensed='true'
 ``` 
-4. Find all tracks that belong to the album type `single`.
+4. **Find all tracks that belong to the album type `single`.**
 ```sql
 select * from spotify where album_type='single'
 ``` 
-5. Count the total number of tracks by each artist.
+5. **Count the total number of tracks by each artist.**
 ```sql
 select artist,count(track) as no_of_tracks from spotify GROUP BY artist order by 2 desc;
 ``` 
 
 ### Medium Level
-1. Calculate the average danceability of tracks in each album.
+1. **Calculate the average danceability of tracks in each album.**
 ```sql
 select album,avg(danceability) from spotify group by album order by 2 desc
 ``` 
-2. Find the top 5 tracks with the highest energy values.
+2. **Find the top 5 tracks with the highest energy values.**
 ```sql
 select track,energy from spotify order by energy desc limit 5
 ```
-3. List all tracks along with their views and likes where `official_video = TRUE`.
+3. **List all tracks along with their views and likes where `official_video = TRUE`.**
 ```sql
 select track,views,likes from spotify where official_video ='true' order by 2 desc
 ```
-4. For each album, calculate the total views of all associated tracks.
+4. **For each album, calculate the total views of all associated tracks.**
 ```sql
 select album,count(track)as total_tracks,sum(views)as total_views from spotify group by album order by 3 desc
 ```
-5. Retrieve the track names that have been streamed on Spotify more than YouTube.
+5. **Retrieve the track names that have been streamed on Spotify more than YouTube.**
 ```sql
 select * from
 (select
